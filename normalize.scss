@@ -1,31 +1,32 @@
 @charset "utf-8";
 
-$font-family: "PingFang SC","Segoe UI",Verdana,Helvetica,Arial,"Microsoft YaHei",sans-serif,iconfont;
+$font-family: "PingFang SC",Verdana,"Segoe UI",Arial,"Microsoft YaHei",sans-serif;
+$code-font: 'Source Code Pro', Courier, 'Courier New', monospace;
+$serif-font: Palatino, Optima, Georgia, serif;
+
+// ==================================================
+//  一致化浏览器表现
+// ==================================================
 
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
 html {
-  background: #fff;
+  color: #333;
+  background: #FFF;
   -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
-  min-height: 100%;
 }
 
 /* 仅支持 IE9+ | Chrome | Firefox 等，使用 border-box */
 html *, html *:before, html *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 /* 设置字体 */
-html, body, h1, h2, h3, h4, h5, h6{
+body, h1, h2, h3, h4, h5, h6 {
   font-family: $font-family;
 }
-
 
 /* 内外边距通常让各个浏览器样式的表现位置不同 */
 body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, menu, nav, section {
@@ -33,9 +34,9 @@ body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset,
   padding: 0;
 }
 
+/* 设置最低高度为视窗高度 */
 body{
-  min-height: 100%;
-  color: #333;
+  min-height: 100vh;
 }
 
 /* 重置 h1 ~ h6 字体大小 */
@@ -59,6 +60,12 @@ h5, h6 {
   font-size: 1.2em;
 }
 
+/* 重置标题字重和行高 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+  line-height: 1.35;
+}
+
 /* 重设 HTML5 标签, IE 需要在 js 中 createElement(TAG) */
 article, aside, details, figcaption, figure, footer, header, menu, nav, section {
   display: block;
@@ -70,8 +77,8 @@ audio, canvas, video {
 }
 
 /* 要注意表单元素并不继承父级 font 的问题 */
-body, button, input, select, textarea {
-  font: 400 16px/1.6 $font-family;
+button, input, select, textarea {
+  font: 400 16px/1.8 $font-family;
 }
 
 button::-moz-focus-inner,
@@ -94,9 +101,9 @@ fieldset, img {
 /* 块/段落引用 */
 blockquote {
   position: relative;
-  color: #999;
+  color: #666;
   font-weight: 400;
-  border-left: 1px solid #1abc9c;
+  border-left: 4px solid #EEE;
   padding-left: 1em;
   margin: 1em 3em 1em 2em;
 }
@@ -166,30 +173,7 @@ ins, a {
   text-decoration: none;
 }
 
-/* 使用 border-bottom 替代原有下划线 */
-a {
-  color: #1BBC9B;
-}
-
-a:hover {
-  color: #17a185;
-}
-
-.cu-article a {
-	border-bottom: 1px solid #1BBC9B;
-}
-
-.cu-article a:hover {
-  color: #17a185;
-	border-bottom-color: #17a185;
-}
-
-/* 专名号：虽然 u 已经重回 html5 Draft，但在所有浏览器中都是可以使用的，
- * 要做到更好，向后兼容的话，添加 class="typo-u" 来显示专名号
- * 关于 <u> 标签：http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-u-element
- * 被放弃的是 4，之前一直搞错 http://www.w3.org/TR/html401/appendix/changes.html#idx-deprecated
- * 一篇关于 <u> 标签的很好文章：http://html5doctor.com/u-element/
- */
+/* 专名号 */
 u {
   text-decoration: underline;
 }
@@ -204,12 +188,12 @@ mark {
 
 /* 代码片断 */
 pre, code, pre tt {
-  font-family: Courier, 'Courier New', monospace;
+  font-family: $code-font;
 }
 
 pre {
-  background: #f8f8f8;
-  border: 1px solid #ddd;
+  background: #F8F8F8;
+  border: 1px solid #DDD;
   padding: 1em 1.5em;
   display: block;
   -webkit-overflow-scrolling: touch;
@@ -218,7 +202,7 @@ pre {
 /* 一致化 horizontal rule */
 hr {
   border: none;
-  border-bottom: 1px solid #cfcfcf;
+  border-bottom: 1px solid #C8C8C8;
   margin-bottom: 0.8em;
   height: 10px;
 }
@@ -241,124 +225,166 @@ strong, b {
   cursor: move;
 }
 
-.cu-clearfix:before, .cu-clearfix:after {
+// ==================================================
+//  扩展类
+// ==================================================
+
+/* 清除浮动 */
+.clearfix:before, .clearfix:after {
   content: "";
   display: table;
 }
 
-.cu-clearfix:after {
+.clearfix:after {
   clear: both;
 }
 
-.cu-clearfix {
+.clearfix {
   zoom: 1;
 }
 
 /* 强制文本换行 */
-.cu-textwrap, .cu-textwrap td, .cu-textwrap th {
+.textwrap, .textwrap td, .textwrap th {
   word-wrap: break-word;
   word-break: break-all;
 }
 
+.textwrap-table {
+  table-layout: fixed;
+}
+
 /* 单行文本 */
-.cu-overflow {
+.nowrap {
   word-wrap: normal;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.cu-textwrap-table {
-  table-layout: fixed;
-}
-
 /* 提供 serif 版本的字体设置: iOS 下中文自动 fallback 到 sans-serif */
-.cu-serif {
-  font-family: Palatino, Optima, Georgia, serif;
+.serif {
+  font-family: $serif-font;
 }
 
-/* 保证块/段落之间的空白隔行 */
-.cu-article p, .cu-article pre, .cu-article ul, .cu-article ol, .cu-article dl, .cu-article form, .cu-article hr, .cu-article table, .cu-article blockquote {
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-  font-size: 16px;
+// ==================================================
+//  优化文章布局
+// ==================================================
+
+.article {
+  font: 400 16px/1.8 $font-family;
+  /* 使用 border-bottom 替代原有下划线，更改默认颜色 */
+  a {
+    color: #1BBC9B;
+    border-bottom: 1px solid #1BBC9B;
+    &:hover {
+      color: #17a185;
+      border-bottom-color: #17a185;
+    }
+  }
+  
+  /* 保证块/段落之间的空白隔行 */
+  p, pre, ul, ol, dl, form, hr, table {
+    margin-bottom: 1em;
+    font-size: 16px;
+  }
+  
+  blockquote {
+    padding: .2em 1em;
+    margin: 18px 0;
+    border-color: #1BBC9B;
+  }
+  
+  /* 标题应该更贴紧内容，并与其他块区分，margin 值要相应做优化 */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+  }
+  
+  /* 文章中还原 ul 和 ol 的样式 */
+  ul {
+    margin-left: 1.3em;
+    list-style: disc;
+  }
+  
+  ol {
+    list-style: decimal;
+    margin-left: 1.9em;
+  }
+  
+  li ul, li ol{
+    margin-bottom: 0.8em;
+    margin-left: 2em;
+  }
+  
+  li ul {
+    list-style: circle;
+  }
+  
+  /* 同 ul/ol，在文章中应用 table 基本格式 */
+  table th, table td, table caption {
+    border: 1px solid #DDD;
+    padding: 0.5em 1em;
+    color: #666;
+  }
+  
+  table th {
+    background: #fbfbfb;
+  }
+  
+  table thead th {
+    background: #f1f1f1;
+  }
+  
+  table caption {
+    border-bottom: none;
+  }
+   
+  /* 去除 webkit 中 input 和 textarea 的默认样式  */
+  input, textarea {
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  
+  em, legend, caption {
+    color: #000;
+    font-weight: inherit;
+  }
+  
+  /* 着重号，只能在少量（少于100个字符）且全是全角字符的情况下使用 */
+  em {
+    position: relative;
+  }
+  
+  em:after {
+    position: absolute;
+    top: 0.6em;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    content: "・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・";
+  }
+  
+  /* Responsive images */
+  img {
+    max-width: 100%;
+  }
 }
 
-/* 标题应该更贴紧内容，并与其他块区分，margin 值要相应做优化 */
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 1.2em;
-  margin-bottom: 0.6em;
-  font-weight: 100;
-  color: #333;
-  line-height: 1.35;
+/* webkit 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* 文章中还原 ul 和 ol 的样式 */
-.cu-article ul {
-  margin-left: 1.3em;
-  list-style: disc;
+::-webkit-scrollbar-track {
+  background: #EEE;
+  border-radius: 4px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-.cu-article ol {
-  list-style: decimal;
-  margin-left: 1.9em;
-}
-
-.cu-article li ul, .cu-article li ol{
-  margin-bottom: 0.8em;
-  margin-left: 2em;
-}
-
-.cu-article li ul {
-  list-style: circle;
-}
-
-/* 同 ul/ol，在文章中应用 table 基本格式 */
-.cu-article table th, .cu-article table td, .cu-article table caption {
-  border: 1px solid #ddd;
-  padding: 0.5em 1em;
-  color: #666;
-}
-
-.cu-article table th {
-  background: #fbfbfb;
-}
-
-.cu-article table thead th {
-  background: #f1f1f1;
-}
-
-.cu-article table caption {
-  border-bottom: none;
-}
-
-/* 去除 webkit 中 input 和 textarea 的默认样式  */
-input, textarea {
-  -webkit-appearance: none;
-  border-radius: 0;
-}
-
-em, legend, caption {
-  color: #000;
-  font-weight: inherit;
-}
-
-/* 着重号，只能在少量（少于100个字符）且全是全角字符的情况下使用 */
-em {
-  position: relative;
-}
-
-em:after {
-  position: absolute;
-  top: 0.65em;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  content: "・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・";
-}
-
-/* Responsive images */
-img {
-  max-width: 100%;
+::-webkit-scrollbar-thumb {
+  background: #D4D4D4;
+  border-radius: 4px;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.15);;
 }
